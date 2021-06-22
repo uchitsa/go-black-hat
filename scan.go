@@ -9,7 +9,10 @@ import (
 func main() {
 	var name string
 	fmt.Print("Enter the address: ")
-	fmt.Scanf("%s\n", &name)
+	_, err := fmt.Scanf("%s\n", &name)
+	if err != nil {
+		return
+	}
 
 	for i := 1; i <= 1024; i++ {
 		time.Sleep(30 * time.Millisecond)
@@ -22,7 +25,10 @@ func main() {
 				return
 			}
 
-			conn.Close()
+			err = conn.Close()
+			if err != nil {
+				return
+			}
 			fmt.Printf("%d open\n", j)
 		}(i)
 	}
